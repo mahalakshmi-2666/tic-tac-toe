@@ -1,38 +1,865 @@
-.App {
-  text-align: center;
+
+/* ================================
+   RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+/* ================================
+   MAIN APP
+================================ */
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 15px;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #141e30,
+        #243b55,
+        #111827
+    );
+
+    background-size: 300% 300%;
+
+    animation: backgroundAnimation 10s ease infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+/* Animated background */
+
+@keyframes backgroundAnimation {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/* ================================
+   NAME SCREEN
+================================ */
+
+.name-container {
+    width: 100%;
+    max-width: 500px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 25px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.4);
+
+    animation: containerAppear 0.8s ease;
 }
 
-.App-link {
-  color: #61dafb;
+
+/* ================================
+   GAME CONTAINER
+================================ */
+
+.game-container {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 25px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    animation: containerAppear 0.7s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+/* Container animation */
+
+@keyframes containerAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
+
+
+/* ================================
+   TITLE
+================================ */
+
+.title {
+    font-size: 48px;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
+
+    color: white;
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3);
+
+    animation: titleAnimation 2s ease-in-out infinite alternate;
+}
+
+
+@keyframes titleAnimation {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.03);
+    }
+}
+
+
+/* ================================
+   SUBTITLE
+================================ */
+
+.subtitle {
+    color: #d1d5db;
+
+    margin-bottom: 30px;
+
+    font-size: 16px;
+}
+
+
+/* ================================
+   PLAYER INPUT
+================================ */
+
+.player-input {
+    text-align: left;
+
+    margin-bottom: 20px;
+}
+
+
+.player-input label {
+    display: block;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+/* Input wrapper */
+
+.input-wrapper {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* Input */
+
+.input-wrapper input {
+    flex: 1;
+
+    padding: 14px 16px;
+
+    border: 2px solid transparent;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 16px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    transition: 0.3s;
+}
+
+
+.input-wrapper input:focus {
+    border-color: #60a5fa;
+
+    box-shadow:
+        0 0 15px rgba(96, 165, 250, 0.5);
+
+    transform: scale(1.02);
+}
+
+
+/* ================================
+   SYMBOLS
+================================ */
+
+.symbol {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    width: 45px;
+
+    text-align: center;
+}
+
+
+/* X RED */
+
+.x-symbol {
+    color: #ff3b3b;
+
+    text-shadow:
+        0 0 10px rgba(255, 59, 59, 0.7);
+}
+
+
+/* O GREEN */
+
+.o-symbol {
+    color: #22c55e;
+
+    text-shadow:
+        0 0 10px rgba(34, 197, 94, 0.7);
+}
+
+
+/* ================================
+   START BUTTON
+================================ */
+
+.start-button {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+
+.start-button:hover {
+    transform: translateY(-4px) scale(1.02);
+
+    box-shadow:
+        0 12px 30px rgba(139, 92, 246, 0.6);
+}
+
+
+.start-button:active {
+    transform: scale(0.96);
+}
+
+
+/* ================================
+   PLAYERS
+================================ */
+
+.players {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+
+/* Player card */
+
+.player-card {
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 2px solid transparent;
+
+    transition: 0.3s;
+}
+
+
+/* Active player */
+
+.active-player {
+    border-color: #60a5fa;
+
+    background: rgba(96, 165, 250, 0.15);
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 0 20px rgba(96, 165, 250, 0.3);
+}
+
+
+/* Player symbol */
+
+.player-symbol {
+    font-size: 35px;
+
+    font-weight: bold;
+}
+
+
+.player-card p {
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+    text-align: left;
+}
+
+
+.player-card h3 {
+    color: white;
+
+    font-size: 17px;
+
+    text-align: left;
+
+    margin-top: 3px;
+}
+
+
+/* VS */
+
+.vs {
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    padding: 8px;
+}
+
+
+/* ================================
+   TURN MESSAGE
+================================ */
+
+.turn-message {
+    margin: 20px 0;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+
+.turn-x {
+    color: #ff3b3b;
+
+    text-shadow:
+        0 0 10px rgba(255, 59, 59, 0.7);
+}
+
+
+.turn-o {
+    color: #22c55e;
+
+    text-shadow:
+        0 0 10px rgba(34, 197, 94, 0.7);
+}
+
+
+/* ================================
+   GAME BOARD
+================================ */
+
+.board {
+    width: 330px;
+
+    height: 330px;
+
+    margin: 25px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    padding: 10px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ================================
+   CELLS
+================================ */
+
+.cell {
+    border: none;
+
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    color: white;
+
+    font-size: 65px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        background 0.3s,
+        box-shadow 0.3s;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* Hover */
+
+.cell:hover {
+    transform: scale(1.05);
+
+    background: rgba(255, 255, 255, 0.2);
+
+    box-shadow:
+        0 5px 20px rgba(255, 255, 255, 0.1);
+}
+
+
+/* Click */
+
+.cell:active {
+    transform: scale(0.92);
+}
+
+
+/* ================================
+   X CELL
+================================ */
+
+.cell-x {
+    color: #ff3b3b;
+
+    text-shadow:
+        0 0 10px rgba(255, 59, 59, 0.8),
+        0 0 25px rgba(255, 59, 59, 0.5);
+
+    animation: symbolPop 0.3s ease;
+}
+
+
+/* ================================
+   O CELL
+================================ */
+
+.cell-o {
+    color: #22c55e;
+
+    text-shadow:
+        0 0 10px rgba(34, 197, 94, 0.8),
+        0 0 25px rgba(34, 197, 94, 0.5);
+
+    animation: symbolPop 0.3s ease;
+}
+
+
+/* Symbol pop animation */
+
+@keyframes symbolPop {
+
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* ================================
+   WINNING CELLS
+================================ */
+
+.winning-cell {
+    animation: winnerAnimation 0.6s ease-in-out infinite alternate;
+
+    background: rgba(255, 255, 255, 0.25);
+}
+
+
+@keyframes winnerAnimation {
+
+    from {
+        transform: scale(1);
+
+        box-shadow:
+            0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    to {
+        transform: scale(1.08);
+
+        box-shadow:
+            0 0 30px rgba(255, 255, 255, 0.8);
+    }
+}
+
+
+/* ================================
+   RESULT MESSAGE
+================================ */
+
+.result-message {
+    font-size: 25px;
+
+    font-weight: bold;
+
+    margin: 20px 0;
+
+    animation: resultAppear 0.6s ease;
+}
+
+
+.winner-message {
+    color: #facc15;
+
+    text-shadow:
+        0 0 10px rgba(250, 204, 21, 0.8),
+        0 0 25px rgba(250, 204, 21, 0.5);
+}
+
+
+.draw-message {
+    color: #60a5fa;
+
+    text-shadow:
+        0 0 10px rgba(96, 165, 250, 0.7);
+}
+
+
+@keyframes resultAppear {
+
+    from {
+        opacity: 0;
+
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+}
+
+
+/* ================================
+   BUTTON CONTAINER
+================================ */
+
+.button-container {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+
+/* ================================
+   RESTART BUTTON
+================================ */
+
+.restart-button,
+.new-game-button {
+    border: none;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+/* Restart */
+
+.restart-button {
+    background: linear-gradient(
+        135deg,
+        #f59e0b,
+        #ef4444
+    );
+}
+
+
+.restart-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(239, 68, 68, 0.4);
+}
+
+
+/* New game */
+
+.new-game-button {
+    background: linear-gradient(
+        135deg,
+        #3b82f6,
+        #6366f1
+    );
+}
+
+
+.new-game-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+
+/* Button click */
+
+.restart-button:active,
+.new-game-button:active {
+    transform: scale(0.94);
+}
+
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+
+    .app {
+        padding: 20px 10px;
+    }
+
+
+    .name-container,
+    .game-container {
+        padding: 25px 18px;
+
+        border-radius: 20px;
+    }
+
+
+    .title {
+        font-size: 34px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .players {
+        gap: 8px;
+    }
+
+
+    .player-card {
+        padding: 10px;
+
+        gap: 7px;
+    }
+
+
+    .player-symbol {
+        font-size: 28px;
+    }
+
+
+    .player-card h3 {
+        font-size: 14px;
+    }
+
+
+    .board {
+        width: 290px;
+
+        height: 290px;
+
+        gap: 7px;
+
+        padding: 7px;
+    }
+
+
+    .cell {
+        font-size: 55px;
+
+        border-radius: 12px;
+    }
+
+
+    .button-container {
+        flex-direction: column;
+    }
+
+
+    .restart-button,
+    .new-game-button {
+        width: 100%;
+    }
+}
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 380px) {
+
+    .title {
+        font-size: 28px;
+    }
+
+
+    .board {
+        width: 250px;
+
+        height: 250px;
+    }
+
+
+    .cell {
+        font-size: 45px;
+    }
+
+
+    .players {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+
+    .player-card {
+        width: 100%;
+    }
+
+
+    .vs {
+        display: none;
+    }
+}
+
